@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Image Repo</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+        td {
+            padding: 10px 10px 10px 10px
+        }
+        .container {
+            max-width: 768px;
+            margin: auto;
+        }
+        </style>
+</head>
+<body>
+    <h1>Image Repo:</h1>
+    <h5>Jonathan Lucki</h5>
+    <div id="image-table">
+        <p>Loading Image data</p>
+    </div>
+
+    <script>
+        fetch('http://shopify.jonathanlucki.ca/images').then(response => {
+            return response.json();
+        }).then(data => {
+            var count = 0;
+            var table = document.createElement('table');
+            var tbody = document.createElement('tbody');
+            for (const image of data.Images) {
+                count++;
+                var tr = document.createElement('tr');
+                var td = document.createElement('td');
+                var b = document.createElement('strong');
+                b.appendChild(document.createTextNode(image.Name));
+                var p1 = document.createElement('p');
+                p1.appendChild(b);
+                td.appendChild(p1);
+                var i = document.createElement('img');
+                i.setAttribute('src', image.Url)
+                i.setAttribute('height', 240)
+                td.appendChild(i);
+                var p2 = document.createElement('p');
+                p2.appendChild(document.createTextNode(image.Date));
+                td.appendChild(p2);
+                tr.appendChild(td);
+                tbody.appendChild(tr);
+            }
+            table.appendChild(tbody);
+            if (count > 0) {
+                document.getElementById('image-table').innerHTML = "";
+                document.getElementById('image-table').appendChild(table);
+            } else {
+                document.getElementById('image-table').innerHTML = "No image data found";
+            }
+        })
+        </script>
+</body>
+</html>

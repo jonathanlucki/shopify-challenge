@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Image Repo Upload Form</title>
+</head>
+<body>
+    <h1>Upload photo:</h1>
+    <h5>Only png files are accepted</h5>
+    <form action="/images" method="post" enctype="multipart/form-data">
+        Image Name: <input type="text" name="name">
+        <br>
+        File: <input type="file" name="file">
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
